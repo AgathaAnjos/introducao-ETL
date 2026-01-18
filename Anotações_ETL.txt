@@ -1,0 +1,161 @@
+ETL => Extract, Transform and Load: 
+    Software cuja a função é a extração de dados de diversos sistemas, transformação desses dados conforme regras de negócios e o carregamento dos dados 
+    geralmente para um data mart (sistema de armazenamento de dados que contém informações específicas da unidade de negócios de uma organização) 
+    e/ ou data warehouse (armazenam dados estruturados e semiestruturados que podem ser usados para mineração de dados de origem, visualização de dados, etc.).
+    
+        Um tipo de data integration (processo de obter acesso e entrega consistentes para todos os tipos de dados) 
+        em três etapas extração, transformação e carregamento, é usado para combinar dados de diversas fontes, 
+        comumente utilizado para construir um data warehouse.
+
+            Nesse sistema, os dados são extraídos (retirados) de um sistema-fonte, transformados (convertidos) em um formato que possa ser carregados (analisados)
+            em nuvem ou outro sistema
+            
+                ETL é uma abordagem alternativa, embora relacionada, projetada para jogar o processamento para o banco de dados, de modo a aprimorar a performace
+
+                    Extract/ extrair => importar dados de diversos tipos e formatos como pasta de trabalho, diversos DB, CSV, TXT, JSON, etc.
+                    se comunica com outros sistemas ou DB para capturar os dados que serão inseridos no destino, seja uma staging area ou outro sistema
+                    Transform/ trasnformar => colunas e linhas, tipos de dados, mesclar e acrescentar, listas e tabelas.
+                    padronização, limpeza e qualidade, dados vindos de sistemas diferentes tem padrões diferentes
+                    Load/ carregar => para modelo de dados.
+                    etapa final onde os dados são lidos das áreas de staging e preparação de dados, e são carregados no data mart final/ data warehouse
+
+
+
+Ferramentas:
+    Softwares utilizados para facilitar o processo de integração de dados através de sequências de operações e instruções tendo condição de solucionar problemas complexos, 
+    já possuindo suas funções específicas sendo necessário apenas a atenção ao fluxo de dados, e mesmo que um usuário não seja técnico poderá desenvolver um projeto
+    com uma rotina de carga, sendo simples de realizar em relação à manutenção de código, onde os metadados são gerados e mantidos de forma automática
+    garantindo uma boa performace com maior velocidade, menos recursos, facilmente deslocadas/ distribuídas entre vários servidores, conexão com múltiplas
+    fontes de dados sendo transparente, reinicialização de onde pararam sem a necessidade de codificação, divisão das finalidades trazendo segurança e estabilidade.
+
+        IBM Informationn Server (data stage)
+        Oracle Integrator (ODI)
+        Informatica Power Center
+        Microsoft Integration Services (SSIS)
+        Pentaho Data Integrator (PDI), ETL open source
+        Talend ETL, ETL open source
+
+
+Processo:
+    Extração => abrange alguns passos como, considerar um DB de clientes especiais com todas as informações essenciais
+    no mapeamento, a extração de origem deve conter a especificação da identidade e seus atributos detalhados, tudo armazenado numa zona temporária, 
+    quando realizada as análises e filtragens dos dados, a nova versão poderá ser comparada com a cópia da versão prévia.
+    Transformação => inclui e a limpeza, racionalização e complementação dos registros, o processo removerá erros e padronizará as informações,
+    o processo de complementação implicará no acréscimo de dados.
+
+
+ETL para big data:
+    Com o crescimento dos big datas tornou-se necessário fazer ETL entre plataformas heterogêneas, e para isso exitem projetos
+    como o hadoop, que possue ferramentas próprias para carga de dados.
+
+        Hadoop => plataforma em java de computação distribuída voltada para clusters (conjunto de servidores interconectados em rede que trabalham juntos para fornecer serviços 
+        de alta disponibilidade e escalabilidade para uma aplicação ou serviço) e processamentode grandes volumes de dados, com atenção a tolerância a falhas.
+
+            SQPOOP => ferramenta para movimentar dados dentre DB relacionais e o ambiente hadoop
+            HIVE => ambiente de SQL sobre um cluster hadoop
+            PIG => ferramenta de script para transformação e processamento de dados
+            SPARK => framework de processamento em memória
+
+    Em big data, o processo de carga também é conhecido como ingestão de dados que geralmente é a primeira parte da carga (extract) a parte mais simple do processo,
+    que consiste em extrair dados dos sistemas de origem e trazer para dentro do data lake ou ambiente de dados utilizado.
+
+
+Biblioteca Pandas:
+        Biblioteca famaosa em python usada para manipulação e análise de dados, com comandos equivalentes do excel, 
+        sendo os dois principais objetos são as series e data frames:
+
+            Series => matriz unidimensional que contém uma sequência de valores que apresentam uma indexação (numéricos inteiros ou rótulos),
+            muito parecida com uma única coluna no excel.
+            DataFrames => estrutura de dados tabular, semelhante a planilha de dados do excel, em que tanto as linhas quanto as colunas apresentam rótulos.
+
+        Permite trabalhar com diferentes tipos de dados:
+
+            Dados tabulares, como planilhas excel ou um tabela SQL
+            Dados ordenados de modo temperal ou não
+            Qualquer outro conjunto de dados que não necessáriamente precisam ser rotulados
+
+        Funções: 
+                na.values => retorna NaN para valores vazios
+                df.head() => para ver as primeiras linhas da coluna
+                df.tail() => para ver as últimas linahs da coluna
+                df.info() => saber que formato se encontram os dados em cada coluna, além da quantidade de memória para ler esse conjunto de dados 
+                df.shape => identifica o número de linhas e colunas de um DataFrame  
+                df.columns => serve apenas para nomear o conjunto de colunas como um todo
+                df.describe() => exibe informações estatísticas a respeito do conjunto de dados e permite realizar uma análise mais profunda
+                df.isnull().sum() => retorna o número de valores ausentes no conjunto de dados
+                df['setor'].unique() => verifica quais os valores únicos existem naquela coluna
+                df['setor'].value_counts().plot(kind='bar') => gera uma visualização simples e rápida com resultado
+                mathplotlib => biblioteca para gráficos
+
+            Leitura dos dados:
+                import pandas as pd
+                url = 'url'
+                df1 = pd.read_csv(url)
+                # dataset is now stored in a pandas dataframe
+                # o conjunto de dados está armazenado em um dataframe no pandas
+                
+                import pandas as pd
+                url = 'url'
+                sf = pd.read_csv(url)
+                sf.head()
+
+
+Bibliotece Scikit-learn:
+    Dispõe de ferramentas simples e eficientes para análise de dados e integração com outras bibliotecas, é reutilizável em diferentes situações,
+    é código aberto, foi construída sobre os pacotes NumPy, SciPy e matplotlib.
+
+        Função:
+            apresentar amostrar
+                from sklearn.datasets import make_regression
+                #gerando uma massa de dados:
+                x, y = make_regression(n_samples=200, n_features=1, noise=30)
+
+            apresentar visualmente
+                import matplotlib.pyplot as plt
+                #mostrando no gráfico
+                plt.scatter(x, y)
+                plt.show()
+
+            criação
+                from sklearn.linear_model import LinearRegression
+                #criação do modelo
+                modelo = LinearRegression()
+
+            adicição dos métodos
+                plt.scatter(x, y)
+                plt.plot(x, modelo.predict(x), color='red', linewidth=3)
+                plt.show()
+
+            fit() => método para apresentar os dados ao modelo
+            predict() => indica que irá aplicar a previsão nos valores de x, o resultado será a previsão de y para cada valor de x apresentado
+            plot() => função do pacote pyplot gera uma reta com os dados apresentados
+
+
+Framework Luigi para ETL com python:
+    framework de exucução criado pelo Spotify que cria pipelines (uma série de etapas de processamento para preparar dados corporativos para análise) 
+    de dados em python, é um pacote que ajuda a construir pipelines complexos de trabalhos em lote, lida com resolução de dependências, 
+    gerenciamento de fluxo de trabalho, visualização, tratamento de falhas, integração de linha de comando, etc, e tem suporte para trabalho de forma gráfica.
+
+                Tópicos:
+                    Target => está relacionado com a execução do projeto final, um alvo contém a saída de uma tarefa, um destino pode ser um local
+                    (por exemplo um arquivo, MySQL, etc.)
+                    Task => onde o gtrabalho real acontece, pode ser independente ou dependente (despejar os dados em arquivo ou DB), cada tarefa é representada
+                    como uma classe python que contém certas funções-memnros obrigatórias, onde contém os métodos:
+                        require() => contém todas as instâncias de tarefas que devem ser executadas antes da tarefa atual
+                        output() => contém o destino onde a saída da tarefa será armazenada, isso pode conter mais de um objeto de destino
+                        run() => contém a lógica real para exutar uma tarefa
+                    
+
+                            Tasks 
+
+                                Scrape Data ==> output ==> file://property.csv ==> input ==> Load into DB
+
+                            Targets
+
+            
+
+
+    
+
+
+
